@@ -19,3 +19,9 @@ While this prototype provides a foundation for a digital community of practice, 
 User Experience: Improving the user interface and experience to ensure intuitive navigation and seamless interaction within the community.
 Additional Features: Adding features like multimedia content sharing, event management, and personalized recommendations to enhance collaboration and engagement among educators.
 AI Integration: Exploring and integrating additional AI services or models to provide more advanced natural language processing capabilities and enable intelligent automation within the platform.
+
+Feedback and Contributions
+The DCoP system should be a dynamic and evolving framework that embodies the concept of knowledge propagation through digital technology. Its specific functionalities should continuously improve to align with the ever-changing digital habits of users and advancements in AI.  I invite others to explore the DCoP system further and offer suggestions for improvement. Thus, I have published the prototype DCoP system that I developed during this research on GitHub, which is available for free downloads. It is my sincere hope that this concept can be evaluated, enhanced, and promoted for the benefit of education and collaboration among industry professionals, teachers, and students. 
+
+To Run This Code
+You need to setup .env and putting your server and database information and setup your google cloud service for NLP component part in the system as my account information has been removed from this uploaded version.
