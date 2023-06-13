@@ -1,0 +1,232 @@
+
+<div class="row col-lg-10 col-md-10">	
+
+	<div class="panel panel-default">
+		<div class="row">
+			<div class='panel-heading'>
+				<a class="btn btn-danger form-btn pull-right" ng-click="deleteTP()" ng-show="deleteFlag" >Delete the Whole Teachingplan</a>
+			</div>
+			<div class="panel-body pt0 pb0">
+				<form class="form-horizontal group-border">
+					<div class="form-group" style="margin-right: 0px">
+						<label class="col-lg-3 col-md-4 control-label" for="title">
+							Teaching Plan Title *
+							<a ng-mouseover="showNamePopover=true;" ng-mouseleave="showNamePopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showNamePopover" style='background-color: #423F2F'>The title of your teaching plan.</div></a>
+						</label>
+						<div class="col-lg-8 col-md-7">
+							<h4 ng-show="!editTitle">{{TP.title}} </h4>
+							<input type="text" class="form-control" id="title" name="title" placeholder="Input Topic Title" ng-model="editTP.title" ng-show="editTitle" required/>
+						</div>
+						<div class="col-lg-1 col-md-1">
+							<a class="btn btn-default form-btn pull-right" ng-click="edit('title')" ng-show="deleteFlag && !editTitle">Edit</a>
+							<a class="btn btn-success form-btn pull-right" ng-click="save('title')" ng-show="deleteFlag && editTitle">Save</a>
+							<a class="btn btn-warning form-btn pull-right" ng-click="cancel('title')" ng-show="deleteFlag && editTitle">Cancel</a>
+						</div>
+					</div>
+					<div class="form-group" style="margin-right: 0px">
+						<label class="col-lg-3 col-md-4 control-label" for="options">
+							Created By
+						</label>
+						<div class="col-lg-8 col-md-7">
+							<h4 ng-show="!editTitle">{{TP.author}} </h4>
+						</div>
+						
+					</div>
+
+					<div class="form-group" style="margin-right: 0px" ng-show="deleteFlag">
+						<label class="col-lg-3 col-md-4 control-label" for="options">
+							Teaching Plan Options
+							<a ng-mouseover="showOptionPopover=true;" ng-mouseleave="showOptionPopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showOptionPopover">The privacy options of your teaching plan.</div></a>
+						</label>
+						<div class="col-lg-8 col-md-7">
+							<input type="checkbox" id = "collaboration" name="Allow Colaboration" ng-model="TP.allow_collaboration_flag" ng-change="change()">
+							<label for="collaboration"> Allow Collaboration</label>
+							<label for="collaboration"> *Please declare how you want the others to collaborate in the Summary</label> <br>
+							
+							<input type='radio' name='public' value="Public" ng-model="TP.public" ng-change="changePrivate()">Public</option> <br>
+							<input type='radio' name='public' value="Private" ng-model="TP.public" ng-change="changePrivate()">Private</option>
+							
+						</div>
+						
+						<div class="col-lg-1 col-md-1">
+							<a class="btn btn-success form-btn pull-right" ng-click="save('option')" ng-show="editOptions">update</a>
+						</div>
+					</div>
+
+					<div class="form-group" style="margin-right: 0px" ng-show="deleteFlag">
+						<label class="col-lg-3 col-md-4 control-label" for="options">
+							Teaching Plan Type
+							<a ng-mouseover="showOptionPopover=true;" ng-mouseleave="showOptionPopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showOptionPopover">To tell if it is student focused or project/topic focused</div></a>
+						</label>
+						<div class="col-lg-8 col-md-7">
+							<input type='radio' name='category' value="Student" ng-model="TP.category" ng-change="changeType()">Student focused</option> <br>
+							<input type='radio' name='category' value="Project" ng-model="TP.category" ng-change="changeType()">Topic/Project focused</option>
+						</div>
+						
+						<div class="col-lg-1 col-md-1">
+							<a class="btn btn-success form-btn pull-right" ng-click="save('category')" ng-show="editTypeOptions">update</a>
+						</div>
+					</div>
+
+					<div class="form-group" style="margin-right: 0px">
+						<label class="col-lg-3 col-md-4 control-label" for="content">
+							Summary 
+							<a ng-mouseover="showWhatPopover=true;" ng-mouseleave="showWhatPopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showWhatPopover">Summarise of your plan.</div></a>
+						</label>
+						<div class="col-lg-8 col-md-7">
+							<h4 ng-show="!editSummary">{{TP.content}} </h4>
+							<textarea class="form-control" id="content" name="content" placeholder="Summarise or discription" ng-model="editTP.content" ng-show="editSummary"/>
+						</div>
+						<div class="col-lg-1 col-md-1">
+							<a class="btn btn-default form-btn pull-right" ng-click="edit('summary')" ng-show="deleteFlag && !editSummary">Edit</a>
+							<a class="btn btn-success form-btn pull-right" ng-click="save('summary')" ng-show="deleteFlag && editSummary">Save</a>
+							<a class="btn btn-warning form-btn pull-right" ng-click="cancel('summary')" ng-show="deleteFlag && editSummary">Cancel</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="panel-body pt0 pb0">	
+				<form class="form-horizontal group-border">
+
+					<div class='form-group' ng-show="newSubjectSection" style="margin-right: 0px">
+						<div class='form-group' style="background-color: #f2f2f2">
+							<label class="col-lg-12 col-md-12 control-label" for="content" style="text-align: center;"">
+								Add subject/section one by one
+							</label>
+						</div>
+						<div class='form-group' style="background-color: #f2f2f2">
+							
+							<label class="col-lg-3 col-md-4 control-label" for="content">
+								Subject
+								<a ng-mouseover="showSubjectPopover=true;" ng-mouseleave="showSubjectPopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showSubjectPopover">section subject can not be changed, but you can altering the content to adjust</div></a>
+							</label>
+							<div class='col-lg-9 col-md-8' for='contentTitle'> 
+								<select name="subject" id="subject" ng-model = "newsubject.subject_id">
+									<option ng-repeat="subject in subjects" value="{{subject.id}}">{{subject.subject}}</option>
+								</select>
+								<div class="pull-right">
+									<a class="btn btn-warning form-btn" ng-click="saveSubjectM()"  style="margin-top:15px;">Save</a>
+									<a class="btn btn-default form-btn" ng-click="cancel('NewModule')" style="margin-top:15px;">Cancel</a>
+								</div>
+							</div>
+						</div>
+
+						
+						<div class='col-lg-12 col-md-12' for='contentTitle'> 
+							<input type='text' class='form-control' placeholder='Input Section Group' ng-model='newsubject.content_group' /> 
+						</div>
+
+						<div class='col-lg-3 col-md-4' for='contentTitle'> 
+							<input type='text' class='form-control' placeholder='Input Section Title' ng-model='newsubject.content_title' /> 
+						</div>
+						<div class='col-lg-8 col-md-7'>
+							<text-angular style='overflow-y:auto' placeholder='filling your section content' ng-model='newsubject.content' ></text-angular>
+						</div> 
+					</div>
+
+					<div class="form-group" style="margin-right: 0px">
+						<div class="col-lg-12 col-md-12">
+							<div class="pull-right">
+								<a class="btn btn-success form-btn" ng-click="addSubjectSection()"  ng-show=" collaborationShowFlag && !editModule && !newSubjectSection" style="margin-top:15px;">Add Another Section</a>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="panel-body pt0 pb0">	
+				<form class="form-horizontal group-border">
+
+                    <div class="tabs mb20">
+                        <ul id="myTab" class="nav nav-tabs">
+                            <li class="{{CurrentSubject == subjectKey? 'active':''}}" ng-repeat="(subjectKey, subjectsection) in TPmodule">
+                                <a href="{{'#'+subjectKey.split(' ')[0]}}" data-toggle="tab" target="_self" ng_click ="tabChoose(subjectKey)">{{subjectKey==''?"General":subjectKey}}</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent2" class="tab-content">
+                        	<div ng-repeat="(subjectKey, subjectsection) in TPmodule">
+	                            <div class="tab-pane" id="{{subjectKey.split(' ')[0]}}" ng_show ="CurrentSubject == subjectKey" style="padding-top:0px; padding-right:0px;">
+						
+									<a class="btn btn-danger form-btn pull-right" ng-click="deleteSection(subjectsection)" ng-show="collaborationShowFlag && !editModule">Delete subject Section</a>
+									
+									<div class='form-group' ng-repeat="(sectionKey, section) in subjectsection" style="margin-right: 0px">
+										<div class='col-lg-12 col-md-12' for='contentGroup' style="background-color: #f0f0f0"> 
+											<h4> {{sectionKey}}</h4>
+										</div>
+									
+										<div  ng-repeat="sectionContent in section">
+											<div class='col-lg-12 col-md-12' for='contentGroup'> 
+												<input type='text' class='form-control' placeholder='Input Section Title' ng-show="editModule && editingModule==sectionContent.id" ng-model='sectionContent.content_group' /> 
+											</div>
+											<div class='col-lg-3 col-md-4' for='contentTitle'> 
+												<h4 ng-show="!editModule || editingModule!=sectionContent.id" class='pull-right'> {{sectionContent.content_title}}</h4>
+												<br><br>
+												<p class='pull-right'>Contributor:     {{sectionContent.author}}</p>
+												<input type='text' class='form-control' placeholder='Input Section Title' ng-show="editModule && editingModule==sectionContent.id" ng-model='sectionContent.content_title' /> 
+
+											</div>
+											<div class='col-lg-8 col-md-7'>
+												<p>{{sectionContent.update_at}}</p>
+
+												<div class="rich-text" ng-bind-html="sectionContent.content" ng-show="!editModule || editingModule!=sectionContent.id" ></div>
+
+												<text-angular style='overflow-y:auto' placeholder='filling your section content' ng-model='sectionContent.content' ng-show="editModule && editingModule==sectionContent.id"></text-angular>
+											</div> 
+											<div class="col-lg-1 col-md-1">
+												<a class="btn btn-default form-btn pull-right" ng-click="editM(sectionContent.id)" ng-show="collaborationShowFlag && !editModule">Edit</a>
+												<a class="btn btn-warning form-btn pull-right" ng-click="saveM(sectionContent)" ng-show="collaborationShowFlag && editModule && editingModule==sectionContent.id">Save</a>
+												<a class="btn btn-default form-btn pull-right" ng-click="cancel('module')" ng-show="collaborationShowFlag && editModule && editingModule==sectionContent.id">Cancel</a>
+												<a class="btn btn-danger form-btn pull-right" ng-click="deleteM(sectionContent.id)" ng-show="collaborationShowFlag && editModule && editingModule==sectionContent.id">Delete</a>
+
+						
+											</div>
+										</div>
+									</div>
+								</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+				</form>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<div id="right-sidebar" class="right-sidebar  hidden-md hidden-sm hidden-xs" style="overflow: scroll;  height: 780px; width :230px">
+    <!-- Start .sidebar-inner -->
+    <div class="sidebar-inner">
+        <!-- Start .sidebar-scrollarea -->
+        <div class="sidebar-scrollarea">
+			<h5 ng-show="TP.title_node != null && TP.title_node.length > 1">Main Nodes from Plan Title</h5>
+			<h5 ng-show="TP.title_node != null && TP.title_node.length == 1">Main Node from Plan Title</h5>
+            <a ng-repeat="titleNode in TP.title_node track by $index" href="/node#/node/{{titleNode}}" target="blank"><span class="badge badge-danger mr10 mb10"> {{ titleNode }} </span></a>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+            <h5 ng-show="TP.node_list != null && TP.node_list.length > 1">Nodes in the Topic Content</h5>
+            <h5 ng-show="TP.node_list != null && TP.node_list.length == 1">Node in the Topic Content</h5>
+            <a ng-repeat="contentNode in TP.node_list track by $index" href="/node#/node/{{contentNode}}" target="blank"><span  class="badge badge-warning mr10 mb10"> {{ contentNode }} </span></a>
+			<br>
+            <br>
+            <br>
+            <br>
+
+
+            <h5 ng-show="TP.topic_list != null && TP.topic_list.length > 1" >Related topics</h5>
+            <h5 ng-show="TP.topic_list != null && TP.topic_list.length == 1" >Related topic</h5>
+            <a ng-repeat="topic in TP.topic_list track by $index" ng-href="/forum#/topicview/{{topic.id}}" target="_blank" style="color:#1a8cff" > 
+            	{{ topic.id }} {{ topic.title }}
+            	<br> 
+            </a>
+            
+            <!-- End .rs tabs -->
+        </div>
+        <!-- End .sidebar-scrollarea -->
+    </div>
+    <!-- End .sidebar-inner -->
+</div>

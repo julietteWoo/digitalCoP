@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "digitalcop",
+  "private_key_id": "111e9a16170749bdcbc6c50d825f74889daacab5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDDx4dybF4fE0W+\n3/r48LaizjN9QGVewath015tEBr7EmQs/CmJAbyRitCqHaUY+wmjrGHGgemmsEdM\nhOuvX1bkA0b8BVKNV/PfRTDUWFXnac1I8L1M64SzAp1Wyc9ZoSDE4aTNnFuui+uu\nhPV4w2W41PuJLztT56XMg8hsQiTa4L4fZGz2ms7Zzak8yNJwVH6L8YdOaKziu7cN\nqEWU/V86HJK2VwLuIDURp8rKCN07jSEujY3D92elecoXnDssoM+GTv7Eg/UxY70P\nWsZx3jGOzCEUgXE59y3eI4iwvXll+fSKk1p5+U7L5QMJV6/vr25EPkOrh7izGKAG\naFstSFhBAgMBAAECggEAF5nroacft5ZOr6J3sl/uXHUILv6+2av2OZ5OAU7SOdcv\nPV8OsMYFUfROkFtvhjHpKRKEXPZXUPFqPva9JNCU/HrKqWII4CIss4s3Rjn57SJL\njZH7+BRiVGQpzIcamH78oM9k2yaQxNt4R3seznabwirmwdRwTf6cdamjVS2qHLqJ\nxFYFIr1vxOgK2DYgo67sQwJfvZ80Lsp+pyJ1t8PLOkiGf/QnvuZDNrsl8m1/QLW1\ninOjUxIvuGKOAJD0EiKy8/29jpTIyFtoKQ9giKLFlNU6BxC4KB9DGSIZjv3VHBIj\nzzFJR9z1UocWuHfK/FAs/mAsUFiFIqMSjnOAO4+UMwKBgQD8Pl1PWmCJ1p6wpNmu\nm3ir2AzKTY7HW9ZQOIAdytDp+u12Fk5mxYLRzwy2Y1GIb1wN7trTeUjy/xkhyLDw\n09tiJtsT614McaUfAwS9pvpyoI8A+aP89xPxjw8JIwxUsalxQ7k5QMOdNf6frRND\nDuQK7fJJLf1jfym7Mu0QXTxpzwKBgQDGseeOWR5ey0tdOqFtGc9uQWzriMBN9kaU\nhEZ5JXwnSFyxlRvZ1gTtik1KXbGXDhnE8RUouwnfDyCqR+vm0WpCLGlq0EIzkB9K\ni/RBVdszWeuSUOvmENgEWjAZctl/gC+o94bB+FChe1Dv+LFAmJAc7HaQ67dK6OnZ\nUn/jM7lw7wKBgCFepr1+uVLC38+Cn4Gn87jYJikFRaQ+FAYc02YdlLG/jnaW0Nxr\nuLjE6WufjAO+p7D4Ll7Xprzu3oZHpJDXlihP95+U/aYryqplndTxKCTN9N0uKXGn\nxi2ovVZ6GoGB12ayjOh0FuzPXdYF8YxnheekPu9LdEAbbIvlWtNVYk6lAoGANgCc\nQqAOFQ2Dyi7pONHPAtRdWhaszYOl4y+gR8TcXYDZUJqKG0aDyFvSbefRIJEAh/pO\nGefb4vgllKI/h1hbXOjdLd60X3dISeaH2EoRbX9++yFrO/hP/b7VW9VPL8wTKAU+\nZvGqWHk/ojkhU8EjSfkqsHCgPIfZJuu5PnMMb5kCgYAIY9ZgpO1BqS+Ff+cMoOqP\nZOQAm3LZDxH5c5XMXJpkbMCm0qikmTDB3+8wmCO8/rc0umu6MIVrxNKpPXWbsS71\ny1CYJi9kO/UMiDtFgvyT3Lkno0plfeTBCBA031iF+/Ft4HdnbG4vuas7KYOF3CSF\n7fSarLoAifG6OpuOD1jsGw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "digitalcopservice@digitalcop.iam.gserviceaccount.com",
+  "client_id": "116520262419933640399",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/digitalcopservice%40digitalcop.iam.gserviceaccount.com"
+}

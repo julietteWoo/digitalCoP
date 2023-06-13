@@ -1,0 +1,126 @@
+<div class="panel-body pt0 pb0">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="col-lg-8 col-md-12"> 
+					<h3 class=panelLabel>Add New Topic</h3>
+				</div>
+				<div class="col-lg-4 col-md-12"> 
+					<div class="pull-right">
+						<a class="btn btn-danger form-btn" ng-click="createNewTopic()" ng-show = "showAddTopic" style="margin-top:15px; margin-bottom:10px;">Add</a>
+						<a class="btn btn-primary form-btn" ng-click="setAddTopicFlag()" ng-show = "showAddTopic" style="margin-top:15px; margin-bottom:10px;"> - </a>
+						<a class="btn btn-primary form-btn" ng-click="setAddTopicFlag()" ng-show = "!showAddTopic" style="margin-top:15px; margin-bottom:10px;"> + </a>
+					</div>
+				</div>
+		    </div>
+			<form class="form-horizontal group-border" ng-show = "showAddTopic">
+				<div class="form-group">
+					<label class="col-lg-3 col-md-4 control-label" for="title">
+						Topic Title *
+						<a ng-mouseover="showNamePopover=true;" ng-mouseleave="showNamePopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showNamePopover">The title of your Topic.</div></a>
+					</label>
+					<div class="col-lg-9 col-md-8">
+						<input type="text" class="form-control" id="title" name="title" placeholder="Input Topic Title" ng-model="newTopic.title" required/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 col-md-4 control-label" for="content">
+						Content *
+						<a ng-mouseover="showWhatPopover=true;" ng-mouseleave="showWhatPopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showWhatPopover">Description of your topic.</div></a>
+					</label>
+					<div class="col-lg-9 col-md-8">
+
+						<text-angular style="overflow-y:auto" id="content" name="content" placeholder="Description of your topic and what are you trying to accomplish" ng-model="newTopic.content" ta-disabled='disabled' required></text-angular>
+					</div>
+				</div>
+
+			</form>
+
+			
+		</div>
+	</div>	
+
+	<div class="tabs inside-panel">
+         <ul id="myTab5" class="nav nav-tabs">
+            <li class="active">
+                <a href="#forumtopic" data-toggle="tab" aria-expanded="true" target="_self"><i class="fa fa-home"></i> Forum Topics</a>
+            </li>
+            <li class="">
+                <a href="#studentrequest" data-toggle="tab" target="_self"><i class="glyphicon glyphicon-user"></i>Student Submitted Requests</a>
+            </li>
+         </ul>
+         <div id="myTabContent5" class="tab-content">
+         	<div class="tab-pane fade active in" id="forumtopic">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="row-fluid">
+								<h3 class=panelLabel>View Topics</h3>
+							</div>
+					    </div>
+				     	<div class="panel-body pt0 pb0">
+
+				     		<div class="searchBox pull-right">
+				     			<div class="input-group">
+				     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+				     			</div>
+				     		</div>
+
+							<table class="table table-bordered table-hover list-page">
+								<tr class="table-head">
+									<th>Topic No.</th>
+									<th>Topic</th>
+									<th>Replies</th>
+									<th>Updated</th>
+								</tr>
+								<tr ng-repeat="topic in topics | filter:search" >
+									<td> No. {{topic.id}}</td>
+									<td><a class="head" ng-click="view(topic.id)"> <h4 style="color:#1a8cff">{{topic.title}} </h4></a></td>
+									<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{topic.replies}}</td>
+									<td> {{topic.updated_at}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="studentrequest">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="row-fluid">
+								<h3 class=panelLabel>View Topics</h3>
+							</div>
+					    </div>
+				     	<div class="panel-body pt0 pb0">
+
+				     		<div class="searchBox pull-right">
+				     			<div class="input-group">
+				     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+				     			</div>
+				     		</div>
+
+							<table class="table table-bordered table-hover list-page">
+								<tr class="table-head">
+									<th>Topic</th>
+									<th>Submit person</th>
+									<th>contact</th>
+									<th>Summary</th>
+									<th>Needed Support</th>
+								</tr>
+								<tr ng-repeat="studentproject in studentprojectlist | filter:search" >
+									<td><h4 style="color:#1a8cff">{{studentproject[1]}} </h4></td>
+									<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{studentproject[4]}}</td>
+									<td><h4 style="color:#1a8cff">{{studentproject[5]}} </h4></td>
+									<td><h4 style="color:#1a8cff">{{studentproject[2]}} </h4></td>
+									<td><h4 style="color:#1a8cff">{{studentproject[3]}} </h4></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

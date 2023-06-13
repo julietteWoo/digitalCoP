@@ -1,0 +1,111 @@
+<div class="row col-lg-12 col-md-12">
+	<div class="panel panel-default" style="width: 900px; right: 150px" >
+		<div class="panel-heading">
+			<div class="row-fluid">
+				<div class="col-lg-10 col-md-10"> 
+					<h3 class=panelLabel ng-hide="editTopic" >{{currentTopic.title}}</h3>
+				</div>
+				<div class="col-lg-2 col-md-2"> 
+					<div class="pull-right" ng-show="">
+						<a class="btn btn-warning  form-btn" href="" style="margin-top:15px; margin-bottom:10px;">Edit</a>
+					</div>
+
+				</div>
+			</div>
+	    </div>
+     	<div class="panel-body pt0 pb0">
+     		<div ng-style="{'height':commentWindowheight,'border':'1px, solid #ccc', 'overflow':'auto'}">
+				<table class="table table-bordered table-hover list-page">
+					<tr style="background-color: #f2f2f2;">
+						<td style = "width:26%">
+							<div class="user-icon"><i class="glyphicon glyphicon-user"></i>
+								{{currentTopic.author}}  
+							</div>
+						</td>
+						<td>
+							Last Updated at: {{currentTopic.updated_at}}
+						</td>
+					</tr>
+
+					<tr>
+						<div class="rich-text" ng-bind-html="currentTopic.contentPolished"></div>
+					</tr>
+					
+				</table>
+
+				<table class="table table-bordered table-hover list-page">
+					<tr class="table-head">
+						<th style="width:6%" >No.</th>
+						<th style="width:20%">User</th>
+						<th>Comments
+							<div class="searchBox pull-right">
+					 			<div class="input-group">
+					 				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+					 			</div>
+					 		</div>
+						</th>
+					</tr>
+					<tr ng-repeat="comment in comments | filter:search">
+						<td>{{$index+1}}</td>
+						<td> 
+							<p><div class="user-icon"><i class="glyphicon glyphicon-user"></i>{{comment.author}} </div>
+							</p>
+						</td>
+						<td>
+							Last updated at: {{comment.updated_at}}
+							<div class="rich-text" ng-bind-html="comment.contentPolished" ng-hide="(editComment && editingComment == comment.id)"></div>
+							
+							<div class="col-lg-12 col-md-12" ng-show="(editComment && editingComment == comment.id)">
+								<text-angular style="overflow-y:auto" id="content" placeholder="{{comment.content}}" ng-model="comment.content" required></text-angular>
+							</div>
+								
+							<div class="col-lg-12 col-md-12"> 
+								<div class="pull-right" ng-show="(currentUser==comment.user_id && (viewComment || editingComment == comment.id))">
+									<a class="btn btn-danger  form-btn" ng-click="deleteCommentFunction(comment.id)" style="margin-top:15px; margin-bottom:10px;">Delete</a>
+								</div>
+
+								<div class="pull-right" ng-show="(viewComment && currentUser==comment.user_id)">
+									<a class="btn btn-warning  form-btn" ng-click="editCommentFunction(comment.id)" style="margin-top:15px; margin-bottom:10px;">Edit</a>
+								</div>
+							
+								<div class="pull-right" ng-show="(editComment && editingComment == comment.id)">
+									<a class="btn btn-success form-btn" ng-click="updateComment(comment)" style="margin-top:15px; margin-bottom:10px;">Update</a>
+								</div>
+							
+								<div class="pull-right" ng-show="(editComment && editingComment == comment.id)">
+									<a class="btn btn-primary form-btn" ng-click="reset()" style="margin-top:15px; margin-bottom:10px;">Cancel</a>
+								</div>
+
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="panel panel-default" ng-hide="currentUser==null || editComment " ng-style=" {'width': '900px', 'right' :'150px'}">
+		<div class="panel-heading">
+			<div class="col-lg-8 col-md-12">
+				<div class="row-fluid">
+					<h3 class=panelLabel> Add a Reply </h3>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-12"> 
+				<div class="pull-right">
+					<a class="btn btn-primary form-btn" ng-click="createNewComment(currentTopic.id)" style="margin-top:15px; margin-bottom:10px;">Add</a>
+				</div>
+			</div>
+	    </div>
+     	<div class="panel-body pt0 pb0" >
+     		<form class="form-horizontal group-border">
+				<div class="form-group">
+					<div class="col-lg-12 col-md-12">
+						<text-angular style="overflow-y:auto ; height: 600px" id="content" placeholder="Put your comment here." ng-model="newComment.content" required></text-angular>
+					
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,210 @@
+<div  class="visiable-md visible-sm visible-xs" style="overflow: scroll;  height: 100px;">
+    <h5 ng-show="currentTopic.teaching_plan_list != null && currentTopic.teaching_plan_list.length > 1" >Related teaching plans</h5>
+    <h5 ng-show="currentTopic.teaching_plan_list != null && currentTopic.teaching_plan_list.length == 1" >Related teaching plan</h5>
+    <a ng-repeat="teachingplan in currentTopic.teaching_plan_list" ng-href="/teachingplan#/view/{{teachingplan.id}}" target="_blank" style="color:#1a8cff" > 
+    	{{ teachingplan.id }} {{ teachingplan.title }}
+    	<br> 
+    </a>
+</div>
+
+<div class="row col-lg-10 col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="row-fluid">
+				<div class="col-lg-8 col-md-8"> 
+					<form class="form-horizontal group-border" ng-show="editTopic">
+						<div class="form-group">
+							<div class="col-lg-12 col-md-12">
+								<textarea class="form-control" id="content" name="content" placeholder="{{currentTopic.title}}" ng-model="editingTopic.title" required/> </textarea> 
+							</div>
+						</div>
+					</form>
+					<h3 class=panelLabel ng-hide="editTopic" >{{currentTopic.title}}</h3>
+				</div>
+				<div class="col-lg-4 col-md-4"> 
+
+					<div class="pull-right" ng-show="((!editTopic) && currentUser==currentTopic.user_id) && (!editComment)">
+						<a class="btn btn-warning  form-btn" ng-click="editTopicFunction(currentTopic.id,currentTopic.content,currentTopic.title)" style="margin-top:15px; margin-bottom:10px;">Edit</a>
+					</div>
+				
+					<div class="pull-right" ng-show="(editTopic && (!editComment))">
+						<a class="btn btn-success form-btn" ng-click="updateTopic()" style="margin-top:15px; margin-bottom:10px;">Update</a>
+					</div>
+				
+					<div class="pull-right" ng-show="(editTopic && currentUser==currentTopic.user_id && (!editComment))">
+						<a class="btn btn-primary form-btn" ng-click="reset()" style="margin-top:15px; margin-bottom:10px;">Cancel</a>
+					</div>
+
+				</div>
+			</div>
+	    </div>
+     	<div class="panel-body pt0 pb0">
+     		
+	     		<div ng-style="{'height':commentWindowheight,'border':'1px, solid #ccc', 'overflow':'auto'}">
+					<table class="table table-bordered table-hover list-page" id='standardtable'>
+						<tr style="background-color: #f2f2f2;">
+							<td style="width:26%">
+								<p><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{currentTopic.author}}
+								</p>
+								{{currentTopic.updated_at}}
+							</td>
+							<td ng-show="!editTopic">
+								<div class="rich-text" ng-bind-html="currentTopic.contentPolished" ></div>
+							</td>
+							<td ng-show="(editTopic && currentUser==currentTopic.user_id && (!editComment))">
+								<text-angular style="overflow-y:auto" id="topiccontent" placeholder="{{currentTopic.content}}" ng-model="editingTopic.content" required></text-angular>
+							</td>
+						<tr>
+					</table>
+
+					
+						<table class="table table-bordered table-hover list-page">
+							<tr class="table-head">
+								<th style="width:6%" >No.</th>
+								<th style="width:20%">User/ updated time</th>
+								<th style="width:74%">Comments
+									<div class="searchBox pull-right">
+							 			<div class="input-group">
+							 				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+							 			</div>
+							 		</div>
+								</th>
+							</tr>
+							<tr ng-repeat="comment in comments | filter:search" >
+								<td>{{$index+1}}</td>
+								<td> 
+									<p><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{comment.author}}
+									</p>
+									{{comment.updated_at}}
+								</td>
+								<td>
+									<div class="rich-text" ng-bind-html="comment.contentPolished" ng-hide="(editComment && editingComment == comment.id && (!editTopic))"></div>
+									
+									<div class="col-lg-12 col-md-12" ng-show="(editComment && editingComment == comment.id && (!editTopic))">
+										<text-angular style="overflow-y:auto" id="content" placeholder="{{comment.content}}" ng-model="comment.content" required></text-angular>
+									</div>
+
+									<label ng-repeat= "(key, STEAMOption) in STEAM" style="margin-right: 15px" ng-show="(editComment && editingComment == comment.id && (!editTopic))"> 
+										<input type="checkbox" id = "{{STEAMOption}}" ng-model="newCommentData.STEAM[key]" ng-true-value="true" ng-false-value="false"> {{key}}
+
+									</label>
+							
+									<br>
+									<label ng-repeat= " subject in subjects" style="margin-right: 15px" ng-show="(editComment && editingComment == comment.id && (!editTopic))"> 
+										<input type="checkbox" id = "{{subject}}" name="{{subject}}" ng-model="newCommentData.subjectList[subject.subject]">
+										{{subject.subject }} 
+									</label>
+										
+
+									<div > 
+										<div class="pull-right" ng-show="(currentUser==comment.user_id && (viewComment || editingComment == comment.id) && (!editTopic))">
+											<a class="btn btn-danger  form-btn" ng-click="deleteCommentFunction(comment.id)" style="margin-top:15px; margin-bottom:10px;">Delete</a>
+										</div>
+
+										<div class="pull-right" ng-show="(viewComment && currentUser==comment.user_id && (!editTopic))">
+											<a class="btn btn-warning  form-btn" ng-click="editCommentFunction(comment.id, comment)" style="margin-top:15px; margin-bottom:10px;">Edit</a>
+										</div>
+									
+										<div class="pull-right" ng-show="(editComment && editingComment == comment.id && (!editTopic))">
+											<a class="btn btn-success form-btn" ng-click="updateComment(comment)" style="margin-top:15px; margin-bottom:10px;">Update</a>
+										</div>
+									
+										<div class="pull-right" ng-show="(editComment && editingComment == comment.id && (!editTopic))">
+											<a class="btn btn-primary form-btn" ng-click="reset()" style="margin-top:15px; margin-bottom:10px;">Cancel</a>
+										</div>
+
+									</div>
+
+									<span ng-repeat= "STEAMObject in comment.STEAMDisplay" class="tag label label-success" ng-hide="(editComment && editingComment == comment.id && (!editTopic))">{{STEAMObject }}</span>
+									<span ng-repeat= "subjectObject in comment.subjectsDisplay" class="tag label label-success" ng-hide="(editComment && editingComment == comment.id && (!editTopic))">{{subjectObject }}</span>
+								</td>
+							</tr>
+						</table>
+				
+				</div>
+			
+		</div>
+	</div>
+	<div class="panel panel-default" ng-hide="editTopic || editComment">
+		<div class="panel-heading">
+			<div class="col-lg-8 col-md-12"> 
+				<div class="row-fluid">
+					<h3 class=panelLabel> Add a Reply </h3>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-12"> 
+				<div class="pull-right">
+					<a class="btn btn-primary form-btn" ng-click="createNewComment(currentTopic.id)" style="margin-top:15px; margin-bottom:10px;">Add</a>
+				</div>
+			</div>
+	    </div>
+     	<div class="panel-body pt0 pb0" >
+     		<form class="form-horizontal group-border">
+				<div class="form-group">
+					<div class="col-lg-12 col-md-12">
+						<text-angular style="overflow-y:auto; height:150px" id="content" placeholder="Put your comment here." ng-model="newComment.content" required></text-angular>
+
+						<label ng-repeat= "(key, STEAMOption) in STEAM" style="margin-right: 15px"> 
+							<input type="checkbox" id = "{{STEAMOption}}" ng-model="newCommentData.STEAM[key]" ng-true-value="true" ng-false-value="false"> {{key}}
+
+						</label>
+				
+						<br>
+						<label ng-repeat= " subject in subjects" style="margin-right: 15px"> 
+							<input type="checkbox" id = "{{subject}}" name="{{subject}}" ng-model="newCommentData.subjectList[subject.subject]">
+							{{subject.subject }} 
+						</label>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="right-sidebar" class="right-sidebar hidden-md hidden-sm hidden-xs" style="overflow: scroll;  height: 780px; width :200px">
+    <!-- Start .sidebar-inner -->
+    <div class="sidebar-inner">
+        <!-- Start .sidebar-scrollarea -->
+        <div class="sidebar-scrollarea">
+				<h5 ng-show="currentTopic.start_point != null && currentTopic.start_point.length > 1">Main Nodes from Topic Title</h5>
+				<h5 ng-show="currentTopic.start_point != null && currentTopic.start_point.length == 1">Main Node from Topic Title</h5>
+            <span ng-repeat="topicNode in currentTopic.start_point" class="badge badge-danger mr10 mb10"> {{ topicNode }} </span>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+            <h5 ng-show="currentTopic.node_recommand != null && currentTopic.node_recommand.length > 1">Nodes in the Topic Content</h5>
+            <h5 ng-show="currentTopic.node_recommand != null && currentTopic.node_recommand.length == 1">Node in the Topic Content</h5>
+            <span ng-repeat="contentNode in currentTopic.node_recommand" class="badge badge-warning mr10 mb10"> {{ contentNode }} </span>
+			<br>
+            <br>
+            <br>
+            <br>
+
+
+            <h5 ng-show="currentTopic.node_list != null && currentTopic.node_list.length > 1" >Nodes in the Comments</h5>
+            <h5 ng-show="currentTopic.node_list != null && currentTopic.node_list.length == 1" >Node in the Comment</h5>
+            <span ng-repeat="commentNode in currentTopic.node_list" class="badge badge-default mr10 mb10"> {{ commentNode }} </span>
+			<br>
+            <br>
+            <br>
+            <br>
+
+
+            <h5 ng-show="currentTopic.teaching_plan_list != null && currentTopic.teaching_plan_list.length > 1" >Related teaching plans</h5>
+            <h5 ng-show="currentTopic.teaching_plan_list != null && currentTopic.teaching_plan_list.length == 1" >Related teaching plan</h5>
+            <a ng-repeat="teachingplan in currentTopic.teaching_plan_list" ng-href="/teachingplan#/view/{{teachingplan.id}}" target="_blank" style="color:#1a8cff" > 
+            	{{ teachingplan.id }} {{ teachingplan.title }}
+            	<br> 
+            </a>
+
+            <!-- End .rs tabs -->
+        </div>
+        <!-- End .sidebar-scrollarea -->
+    </div>
+    <!-- End .sidebar-inner -->
+
+</div>

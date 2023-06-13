@@ -1,0 +1,17 @@
+/* -----------------------------------------
+   Custom.css - put your own changes here 
+----------------------------------------- */
+.custom-user-info{
+	    background-color: #ff944d;
+}
+.custome-page-nav{
+	    background-color: #8c8c8c;
+}
+.panel-primary > .panel-heading {
+	background-color: #8EBDD9;
+	border-color:#8EBDD9;
+}
+.custom-header{
+	color:#7A706E;
+}
+

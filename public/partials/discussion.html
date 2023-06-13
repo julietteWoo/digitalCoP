@@ -1,0 +1,38 @@
+<div class="panel-body pt0 pb0">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row-fluid">
+					<h3 class=panelLabel>View Discussion List</h3>
+				</div>
+		    </div>
+	     	<div class="panel-body pt0 pb0">
+
+	     		<div class="searchBox pull-right">
+	     			<div class="input-group">
+	     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+	     			</div>
+	     		</div>
+
+				<table class="table table-bordered table-hover list-page">
+					<tr class="table-head">
+						<th>Discussion No.</th>
+						<th>Discussion Title</th>
+						<th>Related Node</th>
+						<th>Created by</th>
+						<th>Replies</th>
+						<th>Updated</th>
+					</tr>
+					<tr ng-repeat="topic in topics | filter:search" >
+						<td> No. {{topic.id}}</td>
+						<td><a class="head" ng-click="view(topic.id)"> <h4 style="color:#1a8cff">{{topic.title}} </h4></a></td>
+						<td><a class="head" ng-click="view(topic.id)"> <h4 style="color:#1a8cff">{{topic.start_point}} </h4></a></td>
+						<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{topic.author}}</td>
+						<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{topic.replies}}</td>
+						<td> {{topic.updated_at}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

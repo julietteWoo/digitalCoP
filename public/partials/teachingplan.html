@@ -1,0 +1,184 @@
+<div class="panel-body pt0 pb0">
+	<div class="row">
+		<a class="btn btn-danger form-btn pull-right" ng-click="createNewTP()" style="margin-bottom:10px;">Add</a>
+	</div>
+	<div class="tabs inside-panel">
+         <ul id="myTab5" class="nav nav-tabs">
+         	<li class="active">
+                <a href="#student" data-toggle="tab" aria-expanded="true" target="_self"><i class="glyphicon glyphicon-education"></i> My Students Learning Plans</a>
+            </li>
+            
+            <li class="">
+                <a href="#userplan" data-toggle="tab" target="_self"><i class="glyphicon glyphicon-user"></i> Teaching Plans By Me</a>
+            </li>
+            
+            <li class="">
+                <a href="#project" data-toggle="tab" target="_self"><i class="glyphicon glyphicon-folder-open"></i> Topic/Project Learning Plans</a>
+            </li>
+            <li class="">
+                <a href="#allplan" data-toggle="tab" target="_self"><i class="fa fa-home"></i> All Shared Teaching Plans</a>
+            </li>
+         </ul>
+         <div id="myTabContent5" class="tab-content">
+            
+            <div class="tab-pane fade active in" id="student">
+	            <div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="col-lg-10 col-md-10">
+								<h3 class=panelLabel>These Are All My Students Learning Plans</h3>
+							</div>
+							<div class="col-lg-2 col-md-2">
+					     		<div class="searchBox pull-right">
+					     			<div class="input-group" style="margin-top:15px;">
+					     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+					     			</div>
+					     		</div>
+					     	</div>
+					    </div>
+				     	<div class="panel-body pt0 pb0">
+
+							<table class="table table-bordered table-hover list-page">
+								<tr class="table-head">
+									<th>Plan No.</th>
+									<th>Plan Title</th>
+									<th>Collaborate Teachers</th>
+									<th>Updated</th>
+								</tr>
+								<tr ng-repeat="studentplan in studentplans | filter:search" >
+									<td> No. {{studentplan.id}}</td>
+									<td><a class="head" ng-click="view(studentplan.id)"> <h4 style="color:#1a8cff">{{studentplan.title}} </h4></a></td>
+									<td> 
+										<div ng-repeat = "teacher in studentplan.teacherList">
+											<h4 class="col-lg-8 col-md-8" >
+												{{teacher.name}} 
+												
+											</h4>
+											<button class='col-lg-4 col-md-4 btn btn-danger' ng-show= "admin && user != teacher.id" ng-click = "deleteTeacher(studentplan.id, teacher.id)">delete</button>
+										</div>
+										<button class='col-lg-12 col-md-12 btn btn-warning' ng-show= "admin" ng-click = "addTeacher(studentplan.id)">add</button>
+									</td>
+									<td> {{studentplan.updated_at}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+            </div>
+         	<div class="tab-pane fade" id="userplan">
+                <div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="col-lg-10 col-md-10">
+								<h3 class=panelLabel>These Are All The Teaching Plans Created By Me</h3>
+							</div>
+							<div class="col-lg-2 col-md-2">
+					     		<div class="searchBox pull-right">
+					     			<div class="input-group" style="margin-top:15px;">
+					     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+					     			</div>
+					     		</div>
+					     	</div>
+					    </div>
+				     	<div class="panel-body pt0 pb0">
+
+							<table class="table table-bordered table-hover list-page">
+								<tr class="table-head">
+									<th>Plan No.</th>
+									<th>Plan Title</th>
+									<th>Collaboration</th>
+									<th>Public/Private</th>
+									<th>Updated</th>
+								</tr>
+								<tr ng-repeat="uplan in userplans | filter:search" >
+									<td> No. {{uplan.id}}</td>
+									<td><a class="head" ng-click="view(uplan.id)"> <h4 style="color:#1a8cff">{{uplan.title}} </h4></a></td>
+									<td><a class="head"> <h4>{{uplan.allow_collaboration_flag==1? "Yes": " "}} </h4></a></td>
+									<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{uplan.public}}</td>
+									<td> {{uplan.updated_at}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+            </div>
+            
+            <div class="tab-pane fade" id="project">
+	            <div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="col-lg-10 col-md-10">
+								<h3 class=panelLabel>Project Teaching Plans</h3>
+							</div>
+							<div class="col-lg-2 col-md-2">
+					     		<div class="searchBox pull-right">
+					     			<div class="input-group" style="margin-top:15px;">
+					     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+					     			</div>
+					     		</div>
+					     	</div>
+					    </div>
+				     	<div class="panel-body pt0 pb0">
+
+							<table class="table table-bordered table-hover list-page">
+								<tr class="table-head">
+									<th>Plan No.</th>
+									<th>Plan Title</th>
+									<th>Collaboration</th>
+									<th>Creater/Plan Owner</th>
+									<th>Updated</th>
+								</tr>
+								<tr ng-repeat="projectplan in projectplans | filter:search" >
+									<td> No. {{projectplan.id}}</td>
+									<td><a class="head" ng-click="view(projectplan.id)"> <h4 style="color:#1a8cff">{{projectplan.title}} </h4></a></td>
+									<td><a class="head"> <h4>{{projectplan.allow_collaboration_flag==1? "Yes": " "}} </h4></a></td>
+									<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{projectplan.author}}</td>
+									<td> {{projectplan.updated_at}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+            </div>
+            <div class="tab-pane fade" id="allplan">
+	            <div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="col-lg-10 col-md-10">
+								<h3 class=panelLabel>Teaching Plans List</h3>
+							</div>
+							<div class="col-lg-2 col-md-2">
+					     		<div class="searchBox pull-right">
+					     			<div class="input-group" style="margin-top:15px;">
+					     				<input class="form-control search-box" type="text" ng-model="search" placeholder="Search...">
+					     			</div>
+					     		</div>
+					     	</div>
+					    </div>
+				     	<div class="panel-body pt0 pb0">
+
+							<table class="table table-bordered table-hover list-page">
+								<tr class="table-head">
+									<th>Plan No.</th>
+									<th>Student/Group</th>
+									<th>Collaboration</th>
+									<th>Creater/Plan Owner</th>
+									<th>Updated</th>
+								</tr>
+								<tr ng-repeat="plan in plans | filter:search" >
+									<td> No. {{plan.id}}</td>
+									<td><a class="head" ng-click="view(plan.id)"> <h4 style="color:#1a8cff">{{plan.title}} </h4></a></td>
+									<td><a class="head"> <h4>{{plan.allow_collaboration_flag==1? "Yes": " "}} </h4></a></td>
+									<td><div class="user-icon"><i class="glyphicon glyphicon-user"></i></div>{{plan.author}}</td>
+									<td> {{plan.updated_at}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

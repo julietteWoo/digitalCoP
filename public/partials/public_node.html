@@ -1,0 +1,129 @@
+<a class="btn btn-warning form-btn pull-right" ng-click="showrecent()"  style="margin-top:15px; margin-bottom:10px;">create</a>
+<a class="btn btn-primary form-btn pull-right" ng-click="showpopular()"  style="margin-top:15px; margin-bottom:10px;">create</a>
+
+<div class="panel">         
+         <div>
+	        <div class="row">
+				<div class="col-lg-8 col-md-8"> 
+					<div class="row">
+						<div class="searchBox pull-right">
+							<div class="input-group">
+								<input type="text" placeholder="Search Node" name="search" ng-model='searchNode'>
+		      					<button ng-click ="getSearchNode()"><i class="fa fa-search"></i></button>
+		      					<button ng-click ="clearSearchNode()" ng-show = "searchNodeFlag"><i class="fa fa-cross"></i> clear search</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div id="container"></div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4" ng-show = "currentNode"> 
+					<div class="panel-body pt0 pb0" ng-show = "nodes.length>0">
+						<h3 id="node" name="node"> {{currentNode}}'s Profile</h3>
+						related subject:
+						<div class="panel-body">
+	                        <ul class="progressbars-stats list-unstyled">
+	                            <li ng-repeat="(key, subject) in nodeprofilesubject">
+	                                <span class="progressbar-text">{{key ==""? "General" :key}} </span>
+	                                <div class="progress animated-bar flat mt0">
+	                                    <div class="{{subject.color}}" role="progressbar" data-transitiongoal="{{subject.length/totalSubjectTP}}" aria-valuenow="{{subject.length/totalSubjectTP}}" style="width: {{subject.percentage}};">{{subject.percentage}}</div>
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </div>
+					</div>
+					<div class="panel-body pt0 pb0" ng-show = "nodes.length==0">
+						<h3 id="node" name="node"> Could not find node "{{currentNode}}"</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body pt0 pb0">
+				<div class="row">
+					<div ng-hide = "currentNode">
+						<h2>  Select a node to see the details </h2>
+						<p> the bigger the node means the more content related to the node </p>
+					</div>
+				</div>
+
+				<div class="panel-body pt0 pb0" ng-show = "currentNode">
+					<div class="col-lg-12 col-md-12"> 
+						<div class="panel-heading">
+							<h3 class=panelLabel> Public Discussion List </h3>
+						</div>
+						
+						<table class="table table-bordered table-hover list-page">
+							<tr class="table-head">
+								<th>Discussion No.</th>
+								<th>Discussion</th>
+								<th>Created By</th>
+								<th>Replies</th>
+							</tr>
+							<tr ng-repeat="topic in publicDiscussionList | filter:search" >
+								<td> No. {{topic.topicId}}</td>
+								<td><a class="head" ng-click= "showDiscussionBoard(topic.topicId)" target="_blank"> <h4 style="color:#1a8cff">{{topic.title}} </h4></a></td>
+								<td>{{topic.author}}</td>
+								<td>{{topic.replies}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	        <div class="row">
+				<div class="col-lg-12 col-md-12"> 
+					<table class="table table-bordered table-hover list-page">
+						<tr class="table-head">
+							<th>Popular Discussion</th>
+							<th>related node</th>
+						</tr>
+						<tr ng-repeat="pop in popularlist | filter:search" >
+							<td><a class="head" ng-click= "showDiscussionBoard(pop.topicId)" target="_blank"> <h4 style="color:#1a8cff">{{pop.title}} </h4></a></td>
+							<td><a class="head" ng-click= "getMoreNodeInfo(pop.start_point)" target="_blank"> <h4 style="color:#1a8cff">{{pop.start_point}} </h4></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+	    	
+
+
+         	
+     		<div class="row">
+				<div class="col-lg-12 col-md-12"> 
+					<table class="table table-bordered table-hover list-page">
+						<tr class="table-head">
+							<th>Recent Discussion</th>
+							<th>related node</th>
+						</tr>
+						<tr ng-repeat="recent in recentlist | filter:search" >
+							<td><a  ng-click= "showDiscussionBoard(recent.topicId)" target="_blank"> <h4 style="color:#1a8cff">{{recent.title}} </h4></a></td>
+							<td><a  ng-click= "getMoreNodeInfo(recent.start_point)" target="_blank"> <h4 style="color:#1a8cff">{{recent.start_point}} </h4></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12 col-md-12"> 
+					<h3>student Project for Support</h3>
+					<a href='https://docs.google.com/forms/d/e/1FAIpQLSdKV8wyQf5fEXClW8IOOVa6A7dszqA3pDkxm5OXwkgODqXGmA/viewform' target='_blank'> submit your project </a>
+					<table class="table table-bordered table-hover list-page">
+						<tr class="table-head">
+							<th>title</th>
+							<th>brifing</th>
+							<th>support needed</th>
+						</tr>
+						<tr ng-repeat="studentproject in studentprojectlist | filter:search" >
+							<td><h4 style="color:#1a8cff">{{studentproject[1]}} </h4></td>
+							<td><h4 style="color:#1a8cff">{{studentproject[2]}} </h4></td>
+							<td><h4 style="color:#1a8cff">{{studentproject[3]}} </h4></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+         	
+        
+</div>

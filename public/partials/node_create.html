@@ -1,0 +1,31 @@
+<div class="row col-lg-12 col-md-12">
+	<div class="panel panel-default" style="width: 900px; right: 150px; margin-top: 200px" >
+		<div class="panel-heading">
+			<div class="row-fluid">
+				<div class="col-lg-10 col-md-10"> 
+					<h3 class=panelLabel>New Node</h3>
+				</div>
+			</div>
+	    </div>
+     	<div class="panel-body pt0 pb0">
+			<form class="form-horizontal group-border" >
+				<div class="form-group">
+					<label class="col-lg-2 col-md-3 control-label" for="newNode">
+						Node *
+						<a ng-mouseover="showWhatPopover=true;" ng-mouseleave="showWhatPopover=false;" class="fa fa-info-circle info"><div class="popover" ng-show="showWhatPopover">input your node</div></a>
+					</label>
+					<div class="col-lg-10 col-md-9">
+
+						<input type="text" class="form-control" id="newNode" name="newNode" placeholder="Input Node" ng-model="newNode" required/>
+					</div>
+				</div>
+
+				<a class="btn btn-danger form-btn pull-right" ng-click="addNode(newNode)" style="margin-bottom:10px; margin-top: 10px">Add</a>
+			</form>
+
+		</div>
+
+		</div>
+
+	</div>
+</div>
