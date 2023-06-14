@@ -57,17 +57,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            // OLD SERVER - dcoprmit@gmail.com
-            //'key' => env('AWS_ACCESS_KEY_ID','AKIAUUTHAB23TLQBYMV4'),
-            //'secret' => env('AWS_SECRET_ACCESS_KEY','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'),
-            //'region' => env('AWS_DEFAULT_REGION','ap-southeast-2'),
-            //'bucket' => env('AWS_BUCKET','dcopimage'),
-
-            // NEW SERVER - dcoprmit2@gmail.com
-            'key' => env('AWS_ACCESS_KEY_ID','AKIAYBVICD4MCEEGV27B'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY','sdkuD7O6obIWmWqbqjc6Q9ehW0/H2b8h62vF4DXD'),
+            'key' => env('AWS_ACCESS_KEY_ID','YOUR ACCESS KEY'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY','YOUR SECRET ACCESS KEY'),
             'region' => env('AWS_DEFAULT_REGION','ap-southeast-2'),
-            'bucket' => env('AWS_BUCKET','dcopimage2'),
+            'bucket' => env('AWS_BUCKET','YOUR BUCKET NAME'),
 
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
